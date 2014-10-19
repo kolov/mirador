@@ -58,32 +58,28 @@
 
 (defonce watch-atom (atom {}))
 
-(defn get-future [key]
-  (-> @watch-atom (get key) :future))
 
-(defn restart-watching [key watch notify ms]
-  (let [old-future (get-future key)]
+(defn restart-watching [watch notify ms]
+  (let [old-future (:future @watch-atom)]
     (when old-future (future-cancel old-future))
-    (swap! watch-atom update-in [key] assoc :future
+    (swap! watch-atom assoc :future
            (set-watch-notify watch notify ms))))
 
 
 (defn call-browser [channel msg]
-  (println "Calling browser with message " msg)
   (send! channel msg))
 
-(defn ws-handler [uuid watcher ms]
+(defn ws-handler [watcher ms]
   (fn [request]
     (with-channel
       request channel
       (on-close channel (fn [status]
-                          (println "Killing future")
-                          (future-cancel (get-future uuid))))
+                          (println "Killing watch job")
+                          (future-cancel (:future @watch-atom))))
       (on-receive channel
                   (fn [data]
                     (call-browser channel "started")
-                    (restart-watching uuid
-                                      watcher
+                    (restart-watching watcher
                                       #(call-browser channel "reload")
                                       ms))))))
 
@@ -91,8 +87,7 @@
   (let [watcher (:watcher options (Exception. "no :watcher specified"))
         ms (:ms options 100)
         uri (:uri options (Exception. ":uri has to be specified"))
-        uuid (:id options (Exception. "unique :id has to be specified"))
-        watch-handler (ws-handler uuid watcher ms)]
+        watch-handler (ws-handler watcher ms)]
     (fn [req]
       (if (= uri (:uri req))
         (watch-handler req)
