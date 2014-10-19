@@ -1,4 +1,5 @@
 # mirador
+## If anything changes, I'll tell the browser.
 
 Live reload on source changes for Clojure Ring applications
 
@@ -16,22 +17,22 @@ and then to your ring middleware:
 ```                            
 and then a piece of Javascript to your page :
 ```javascript
-    <script language="JavaScript">
-        socket= new WebSocket('ws://localhost:3001/watch-reload');
-        socket.onopen= function() {
-            socket.send('watch');
-        };
-        socket.onmessage= function(s) {
-            if( s.data == 'started') {
-                console.log("Watching started");
-            } else if( s.data == 'reload') {
-                console.log("reloading");
-                window.location.reload();
-            } else {
-                alert('Don\'t know what to do with [' + s.data + ']');
-            }
-        };
-    </script>
+
+    socket= new WebSocket('ws://localhost:3001/watch-reload');
+    socket.onopen= function() {
+        socket.send('watch');
+    };
+    socket.onmessage= function(s) {
+        if( s.data == 'started') {
+               console.log("Watching started");
+        } else if( s.data == 'reload') {
+            console.log("reloading");
+            window.location.reload();
+        } else {
+            alert('Don\'t know what to do with [' + s.data + ']');
+        }
+    };
+
 ```   
     
 That's it: you set a watcher to watch:
@@ -48,9 +49,9 @@ See the [demo project] (https://github.com/kolov/demo-mirador) and the demo: ![v
 ## Q & A
 
 ##### What is this needed for?
-Mostly static content, css and enlive templates, I think. Clojurscript seem to have good support for live reload, and code changes usually need more sofisticated scenarios than just reloading.
+Mostly static content, enlive templates, css and Javascript, I think. Clojurscript seem to have good support for live reload, and code changes usually need more sofisticated scenarios than just reloading.
 ##### The watchers will detect the change and the browser will reload, but how will the reloaded content be up to date?
-It is up to other middleware to update before processing the request - Code changes will be reloaded by ring.middleware.reload/wrap-reload. To reload any affected enlive templates on the fly, use [com.akolov.enlive-reload/wrap-enlive-reload](https://github.com/kolov/enlive-reload).
+It is up to other middleware to update before processing the request - Code changes will be reloaded by ring.middleware.reload/wrap-reload. To reload any affected enlive templates on the fly, use [com.akolov.enlive-reload/wrap-enlive-reload](https://github.com/kolov/enlive-reload). You could implement a watcher that does some extra work before notifying about the change.
 ##### Why Javascript and not Clojurescript?
 The tiny code snippet needed in the browser can easily be rewritten to anything executable in the browser that fits your enironment/process.
 
