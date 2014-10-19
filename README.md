@@ -5,17 +5,17 @@ Live reload on source changes for Clojure Ring applications
 ## Usage
 
 Add to dependencies:
-
+```clojure
     [com.akolov.mirador "0.1.0"]
-    
+```    
     
 and then to your ring middleware:
-
+```clojure
     watch-reload {:watcher (watcher-folder "resources")
                             :uri     "/watch-reload"})
-                            
+```                            
 and then a piece of Javascript to your page :
-
+```javascript
     <script language="JavaScript">
         socket= new WebSocket('ws://localhost:3001/watch-reload');
         socket.onopen= function() {
@@ -32,7 +32,7 @@ and then a piece of Javascript to your page :
             }
         };
     </script>
-    
+```   
     
 That's it: you set a watcher to watch:
   - a change in a folder and subfolders
