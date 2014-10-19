@@ -4,7 +4,7 @@ Live reload on source changes for Clojure Ring applications
 
 ## Usage
 
-add to dependencies:
+Add to dependencies:
 
     [com.akolov.mirador "0.1.0"]
     
@@ -40,6 +40,10 @@ That's it: you set a watcher to watch:
   - wahtever else you can think of
   
 The middleware will schedule the watchers (default time 100 ms) and send a message to the socket if any watcher fires, the code listening in the browser will reload the page. Pretty simple, I wander why did I work so long without it.
+
+## Demo
+
+See the [demo project] (https://github.com/kolov/mirador) and a video (work in progress)
 
 ## Q & A
 
