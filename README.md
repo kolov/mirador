@@ -43,7 +43,7 @@ The middleware will schedule the watchers (default time 100 ms) and send a messa
 
 ## Demo
 
-See the [demo project] (https://github.com/kolov/mirador) and a video (work in progress)
+See the [demo project] (https://github.com/kolov/demo-mirador) and a video (work in progress)
 
 ## Q & A
 
