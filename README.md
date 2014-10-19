@@ -48,16 +48,14 @@ See the [demo project] (https://github.com/kolov/demo-mirador) and the demo: ![v
 ## Q & A
 
 ##### What is this needed for?
-Mostly static content, css and enlive templates, I think. Clojurscript seem to have good support for live reload, and code changes usually need more sofosticated scenarios than just reloading.
-##### The watchers will detect the change ant the browser will reload, but how will the reloaded content be up to date?
-It is up to other middleware to update before processing the request - ring.middleware.reload/wrap-reload will relaod any updated namespaces, com.akolov.enlive-reload/wrap-enlive-reload will reload any affected enlive templates.
+Mostly static content, css and enlive templates, I think. Clojurscript seem to have good support for live reload, and code changes usually need more sofisticated scenarios than just reloading.
+##### The watchers will detect the change and the browser will reload, but how will the reloaded content be up to date?
+It is up to other middleware to update before processing the request - Code changes will be reloaded by ring.middleware.reload/wrap-reload. To reload any affected enlive templates on the fly, use [com.akolov.enlive-reload/wrap-enlive-reload](https://github.com/kolov/enlive-reload).
 ##### Why Javascript and not Clojurescript?
-Feel free to rewrite the client code snippet to fit your enironment/process.
+The tiny code snippet needed in the browser can easily be rewritten to anything executable in the browser that fits your enironment/process.
 
 
 ## License
-
-Copyright © 2014 FIXME
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
