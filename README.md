@@ -1,5 +1,5 @@
 # mirador
-## If anything changes, I'll tell the browser.
+## If anything changes, we'll tell the browser. Immediately.
 
 Live reload on source changes for Clojure Ring applications
 
@@ -54,6 +54,8 @@ Mostly static content, enlive templates, css and Javascript, I think. Clojurscri
 It is up to other middleware to update before processing the request - Code changes will be reloaded by ring.middleware.reload/wrap-reload. To reload any affected enlive templates on the fly, use [com.akolov.enlive-reload/wrap-enlive-reload](https://github.com/kolov/enlive-reload). You could implement a watcher that does some extra work before notifying about the change.
 ##### Why Javascript and not Clojurescript?
 The tiny code snippet needed in the browser can easily be rewritten to anything executable in the browser that fits your enironment/process.
+##### How are file updates detected?
+The java.nio.File.WatchService alerts extremely slow on Mac OS (haven't checked on others), mirador just checks filetimes few times a second.  
 
 
 ## License
