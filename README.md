@@ -1,7 +1,7 @@
 # mirador
 ## If anything changes, we'll tell the browser. Immediately.
 
-Live reload on source changes for Clojure Ring applications
+Live reload on changes in static files and Enlive templates for Clojure Ring applications
 
 ## Usage
 
