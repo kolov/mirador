@@ -1,5 +1,5 @@
 # mirador
-## If anything changes, we'll tell the browser. Immediately.
+## If anything changes, mirador will tell the browser. Immediately.
 
 Live reload on changes in static files and Enlive templates for Clojure Ring applications
 
