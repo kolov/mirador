@@ -10,7 +10,8 @@ Add to dependencies:
     [com.akolov.mirador "0.1.0"]
 ```    
     
-Add a ring middleware to watch for changes. For example, react when an enlive template or snippet has changed::
+Add a ring middleware to watch for changes. For example, to react when an
+enlive template or snippet has changed::
 ```clojure
     watch-reload {:watcher (watcher-folder "resources/pages")
                             :uri     "/watch-reload"})
@@ -35,7 +36,11 @@ and then a piece of Javascript to your page :
 
 ```   
     
-You set a predifend watcher or implement your own. The middleware will schedule the watchers (default time 100 ms) and send a message to the socket if any watcher fires, the code listening in the browser will reload the page. Pretty simple, I wander why did I work so long without it.
+You set a predefined watcher or implement your own. The middleware will schedule the watchers
+(default time 100 ms)
+and send a message to the socket if any watcher fires,
+the code listening in the browser will reload the page.
+Pretty simple, I wonder why did I work so long without it.
 
 ## Demo
 

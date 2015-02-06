@@ -1,7 +1,9 @@
 (ns com.akolov.mirador.core
   (:require
-    [org.httpkit.server :refer :all])
-  )
+    [org.httpkit.server :refer :all]
+    [clojure.tools.logging :as log]
+    )
+  (:import (java.nio.file Paths) ))
 
 (defn set-interval [callback ms]
   "schedule a function to execute periodically"
@@ -34,18 +36,26 @@
                         (concat
                           (filter #(not (.isDirectory %)) files)
                           (flatten (map list-files (filter #(.isDirectory %) files))))))]
-    (list-files (java.io.File. fname))))
+    (let [dir (java.io.File. fname)]
+      (if (.isDirectory dir)
+        (list-files dir)
+        (throw (Exception. (str dir " is not a folder in "
+                                (.normalize (.toAbsolutePath (Paths/get "." (into-array String []))))
+                                )))
+        ))))
 
 (defn watcher-folder [folder]
-  "return a function which, on subsequent calls,
+  "return a function which:
   returns true if a file in folder changed, was added or deleted"
+  (log/debug "Initializing watcher on folder " folder)
   (let [files (files-in-folder folder)
         last-times (atom (file-times files))]
     (fn []
       (let [files (files-in-folder folder)
             new-times (file-times files)]
+
         (when (not= new-times @last-times)
-          (println "Detected file change!")
+          (log/debug "Detected file change!")
           (reset! last-times new-times)
           true)))
     )
@@ -74,10 +84,11 @@
     (with-channel
       request channel
       (on-close channel (fn [status]
-                          (println "Killing watch job")
+                          (log/debug "Killing watch job")
                           (future-cancel (:future @watch-atom))))
       (on-receive channel
-                  (fn [data]
+                  (fn [_]
+                    (log/debug "Started channel")
                     (call-browser channel "started")
                     (restart-watching watcher
                                       #(call-browser channel "reload")
