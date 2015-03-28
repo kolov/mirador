@@ -13,4 +13,7 @@
 
                               :plugins      [
                                               [lein-midje "3.0.0"]]}}
+            :repositories [
+                           ["snapshots" "http://nexus.akolov.com/content/repositories/snapshots"]
+                           ["releases" "http://nexus.akolov.com/content/repositories/releases"]]
             )
