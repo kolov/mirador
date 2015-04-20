@@ -1,4 +1,4 @@
-(defproject com.akolov/mirador "0.2.0-SNAPSHOT"
+(defproject com.akolov/mirador "0.2.1"
             :description "instant reloading on changes"
             :url "https://github.com/kolov/mirador"
             :license {:name "Eclipse Public License"
@@ -8,12 +8,10 @@
                            [http-kit "2.1.16"]]
 
             :profiles {
-                        :dev {:dependencies [[midje "1.6.3"]
-                                             [midje-junit-formatter "0.1.0-SNAPSHOT"]]
+                       :dev {:dependencies [[midje "1.6.3"]
+                                            [midje-junit-formatter "0.1.0-SNAPSHOT"]]
 
-                              :plugins      [
-                                              [lein-midje "3.0.0"]]}}
-            :repositories [
-                           ["snapshots" "http://nexus.akolov.com/content/repositories/snapshots"]
-                           ["releases" "http://nexus.akolov.com/content/repositories/releases"]]
+                             :plugins      [
+                                            [lein-midje "3.0.0"]]}}
+
             )
