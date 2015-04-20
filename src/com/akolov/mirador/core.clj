@@ -3,7 +3,7 @@
     [org.httpkit.server :refer :all]
     [clojure.tools.logging :as log]
     )
-  (:import (java.nio.file Paths) ))
+  (:import (java.nio.file Paths)))
 
 (defn set-interval [callback ms]
   "schedule a function to execute periodically"
@@ -39,9 +39,10 @@
     (let [dir (java.io.File. fname)]
       (if (.isDirectory dir)
         (list-files dir)
-        (throw (Exception. (str dir " is not a folder in "
-                                (.normalize (.toAbsolutePath (Paths/get "." (into-array String []))))
-                                )))
+        (log/warn (str dir " is not a folder in "
+                       (.normalize (.toAbsolutePath (Paths/get "." (into-array String []))))
+                       ". Will NOT be watched by mirador"
+                       ))
         ))))
 
 (defn watcher-folder [folder]

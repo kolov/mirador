@@ -1,4 +1,4 @@
-(defproject com.akolov/mirador "0.2.1"
+(defproject com.akolov/mirador "0.2.2-SNAPSHOT"
             :description "instant reloading on changes"
             :url "https://github.com/kolov/mirador"
             :license {:name "Eclipse Public License"
