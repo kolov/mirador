@@ -1,5 +1,5 @@
 # mirador
-## If anything changes, mirador will tell the browser. Immediately.
+## If anything changes, mirador will tell the browser to reload. Immediately.
 
 Live reload on changes in static files and Enlive templates for Clojure Ring applications
 
@@ -7,7 +7,7 @@ Live reload on changes in static files and Enlive templates for Clojure Ring app
 
 Add to dependencies:
 ```clojure
-    [com.akolov.mirador "0.1.0"]
+    [com.akolov.mirador "0.2.1"]
 ```    
     
 Add a ring middleware to watch for changes. For example, to react when an
