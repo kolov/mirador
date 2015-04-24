@@ -84,7 +84,7 @@
   (fn [request]
     (with-channel
       request channel
-      (on-close channel (fn [status]
+      (on-close channel (fn [_]
                           (log/debug "Killing watch job")
                           (future-cancel (:future @watch-atom))))
       (on-receive channel
