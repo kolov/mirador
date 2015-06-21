@@ -1,7 +1,8 @@
 # mirador
 ## If anything changes, mirador will tell the browser to reload. Immediately.
 
-Live reload on changes in static files and Enlive templates for Clojure Ring applications
+Live reload on changes in static files (html, css, js) for Clojure Ring applications. Can reload 
+changes in Enlive templates too in combination with [com.akolov.enlive-reload/wrap-enlive-reload](https://github.com/kolov/enlive-reload)
 
 ## Usage
 
